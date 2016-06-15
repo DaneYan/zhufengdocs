@@ -9,6 +9,7 @@ webpack是一款强大的模块加载器兼打包工具，它能把各种资源�
 - [webpack官网](http://webpack.github.io)  
 - [webpack文档](http://webpack.github.io/docs) 
 - [本教程配套代码](https://github.com/zhufengnodejs/webpack-lesson)
+本文转载自 [郭永峰前端技术博客](http://guoyongfeng.github.io/idoc/html/React%E8%AF%BE%E7%A8%8B%E4%B8%93%E9%A2%98/Webpack%E5%9F%BA%E7%A1%80.html)
 
 ## 1. webpack命令行
 ### 1.1 全局安装webpack

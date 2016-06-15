@@ -6,6 +6,7 @@ React 是一个用于构建用户界面的JavaScript库
 [react中文网](http://react-china.org)
 [react中文网](http://ant.design)
 [githup](https://github.com/facebook/react)
+本文转载自 [郭永峰前端技术博客](http://guoyongfeng.github.io/idoc/html/React%E8%AF%BE%E7%A8%8B%E4%B8%93%E9%A2%98/React%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB.html)
 
 ## 2. 安装react
 ```sh
@@ -102,23 +103,29 @@ ReactDOM.render(
 * `getDefaultProps`函数可以用来定会引起组件的默认属性
 
 ```javascript
- var Person = React.createClass({
-     propTypes: { //类似于约定了一个接口文档,用于这是验证传递给组件的属性，
-         name: React.PropTypes.string.isRequired, //定义msg的属性类型为字符串，必须传入
-         gender: React.PropTypes.number.isRequired
-     },
-     getDefaultProps:function(){ //设置默认属性，如果上级组件不传就使用默认值
-         return {name:'无名氏',age:0}
-     },
-     render: function() {
-         return (<h1> {this.props.name} {this.props.gender}</h1>);//属性可以通过属性对象this.props中取出
-     }
- });
- 
- ReactDOM.render(
-     <Person gender="男" />,//属性可以在使用组件时传入
-     document.getElementById('app')
- );
+var Person = React.createClass({
+    propTypes: { //类似于约定了一个接口文档,用于这是验证传递给组件的属性，
+        name: React.PropTypes.string.isRequired, //定义msg的属性类型为字符串，必须传入
+        gender: React.PropTypes.string.isRequired,
+        age:React.PropTypes.number.isRequired
+    },
+    getDefaultProps:function(){
+        return {name:'无名氏'}
+    },
+    render: function() {
+        return (<h1> {this.props.name} {this.props.gender} {this.props.age}</h1>);//属性可以通过属性对象this.props中取出
+    }
+});
+
+var props = {
+    gender:'男',
+    age:18
+}
+
+ReactDOM.render(
+    <Person {...props} />,//属性可以在使用组件时传入
+    document.getElementById('app')
+);
 ```
 
 ### 6.3 this.props.children
@@ -455,4 +462,79 @@ ReactDOM.render(<div>
   <Counter1/>
   <Counter2/>
 </div>,document.getElementById('app'));
+```
+
+## 12. 插件实现双向数据绑定
+在`index.html`引入插件
+```
++ <script src="lib/react/react-with-addons.js"></script>
+```
+JS实现
+```
+var Input = React.createClass({
+    mixins:[React.addons.LinkedStateMixin],
+    getInitialState: function() {//获取初始状态
+        return {msg: '珠峰培训'};
+    },
+    render: function () {
+        var msg = this.state.msg;
+        return (
+            <div>
+                <input type="text" valueLink={this.linkState('msg')} />
+                <p>{msg}</p>
+            </div>
+        );
+    }
+});
+
+ReactDOM.render(<Input/>, document.getElementById('app'));
+```
+
+## 13.珠峰留言版
+```javascript
+var Board = React.createClass({
+    getInitialState: function () {
+        return {
+            msg: '请输入',
+            messages:this.props.messages
+        };
+    },
+    render: function () {
+        return (
+            <div>
+                <h1>{this.props.title}</h1>
+                <input type="text" defaultValue={this.state.msg} ref="txtMsg" onClick={this.clear}/>
+                <input type="button" value='发言' onClick={this.leaveMsg}/>
+                <ul>
+                    {
+                        this.state.messages.map(function (item, index) {
+                            return <li key={index}>{item}</li>
+                        })
+                    }
+                </ul>
+            </div>
+        )
+    },
+    clear:function(){
+        this.refs.txtMsg.value =  '';
+    },
+    leaveMsg: function (event) {
+       this.state.messages.push(this.refs.txtMsg.value);
+       localStorage.setItem('messages',JSON.stringify(this.state.messages));//每次状态都是一个新的state对象
+       this.setState({
+           messages:this.state.messages
+       },function(){
+           this.refs.txtMsg.value =  '';
+       });
+    }
+})
+var data = {
+    title: '珠峰留言版',
+    messages: JSON.parse(localStorage.getItem('messages'))||[]
+}
+
+ReactDOM.render(
+    <Board {...data}/>,
+    document.getElementById('app')
+);
 ```

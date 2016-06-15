@@ -1,5 +1,6 @@
 ## ECMAScript6
 ECMAScript 简称就是 ES ，你可以把它看成是一套标准， JavaScript 就是实施了这套标准的一门语言。 现在主流浏览器使用的是 ECMASciprt 5 。
+本文转载自 [郭永峰前端技术博客](http://guoyongfeng.github.io/idoc/html/React%E8%AF%BE%E7%A8%8B%E4%B8%93%E9%A2%98/%E5%BF%AB%E9%80%9F%E6%90%9E%E5%AE%9A%E5%B8%B8%E7%94%A8%E7%9A%84ES6%E6%96%B0%E7%89%B9%E6%80%A7.html)
 
 ## 1. 级块作用域变量-let
 作用域就是一个变量的为作用范围。也就是你声明一个变量以后，这个变量可以在什么场合下使用    
