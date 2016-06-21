@@ -42,7 +42,10 @@
                     "ES6.md",
                     "webpack.md",
                     "javascript.md",
-                    "react.md"
+                    "react.md",
+                    "babel.md",
+                    "react基础应用.md",
+                    "缓存.md"
                 ]
             },
             {
