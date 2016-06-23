@@ -35,7 +35,9 @@
                 ]
             },
             {
-                "HTML": []
+                "HTML": [
+                    "webstorage.md"
+                ]
             },
             {
                 "JAVASCRIPT": [
@@ -45,7 +47,9 @@
                     "react.md",
                     "babel.md",
                     "react基础应用.md",
-                    "缓存.md"
+                    "缓存.md",
+                    "react-router.md",
+                    "react路由应用.md"
                 ]
             },
             {
