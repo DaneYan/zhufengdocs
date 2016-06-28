@@ -17,7 +17,7 @@
         </div>
         <input type="checkbox" id="idoc_nav" />
         <div class="menu_tree">
-        <ul><li><a href="../../index.html">index</a></li><li><a href="#"><span></span>前端工程化</a><ul></ul></li><li><a href="#"><span></span>前端框架</a><ul></ul></li><li><a href="#"><span></span>数据库</a><ul></ul></li><li><a href="#"><span></span>CSS</a><ul></ul></li><li><a href="#"><span></span>Git</a><ul><li><a href="../../html/Git/git安装.html">git安装</a></li><li><a href="../../html/Git/git.html">git</a></li></ul></li><li><a href="#"><span></span>HTML</a><ul><li><a href="../../html/HTML/webstorage.html">webstorage</a></li></ul></li><li><a href="#"><span></span>JAVASCRIPT</a><ul><li><a href="../../html/JAVASCRIPT/ES6.html">ES6</a></li><li><a href="../../html/JAVASCRIPT/webpack.html">webpack</a></li><li class="active"><a href="../../html/JAVASCRIPT/javascript.html">javascript</a></li><li><a href="../../html/JAVASCRIPT/react.html">react</a></li><li><a href="../../html/JAVASCRIPT/babel.html">babel</a></li><li><a href="../../html/JAVASCRIPT/react基础应用.html">react基础应用</a></li><li><a href="../../html/JAVASCRIPT/缓存.html">缓存</a></li><li><a href="../../html/JAVASCRIPT/react-router.html">react-router</a></li><li><a href="../../html/JAVASCRIPT/react路由应用.html">react路由应用</a></li></ul></li><li><a href="#"><span></span>NODEJS</a><ul></ul></li><li><a href="#"><span></span>工具</a><ul></ul></li></ul>    
+        <ul><li><a href="../../index.html">index</a></li><li><a href="#"><span></span>前端工程化</a><ul></ul></li><li><a href="#"><span></span>前端框架</a><ul></ul></li><li><a href="#"><span></span>数据库</a><ul></ul></li><li><a href="#"><span></span>CSS</a><ul></ul></li><li><a href="#"><span></span>Git</a><ul><li><a href="../../html/Git/git安装.html">git安装</a></li><li><a href="../../html/Git/git.html">git</a></li></ul></li><li><a href="#"><span></span>HTML</a><ul><li><a href="../../html/HTML/webstorage.html">webstorage</a></li></ul></li><li><a href="#"><span></span>JAVASCRIPT</a><ul><li><a href="../../html/JAVASCRIPT/ES6.html">ES6</a></li><li><a href="../../html/JAVASCRIPT/webpack.html">webpack</a></li><li class="active"><a href="../../html/JAVASCRIPT/javascript.html">javascript</a></li><li><a href="../../html/JAVASCRIPT/react.html">react</a></li><li><a href="../../html/JAVASCRIPT/babel.html">babel</a></li><li><a href="../../html/JAVASCRIPT/react基础应用.html">react基础应用</a></li><li><a href="../../html/JAVASCRIPT/缓存.html">缓存</a></li><li><a href="../../html/JAVASCRIPT/react-router.html">react-router</a></li><li><a href="../../html/JAVASCRIPT/react路由应用.html">react路由应用</a></li></ul></li><li><a href="#"><span></span>NODEJS</a><ul><li><a href="../../html/NODEJS/加密.html">加密</a></li><li><a href="../../html/NODEJS/动态服务器.html">动态服务器</a></li><li><a href="../../html/NODEJS/压缩.html">压缩</a></li><li><a href="../../html/NODEJS/静态文件服务器.html">静态文件服务器</a></li></ul></li><li><a href="#"><span></span>工具</a><ul></ul></li></ul>    
         </div>
         
         
@@ -49,16 +49,13 @@
 </body>
 <script src="http://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
 <script>
-    var bar = $(window).height() - $('.navbar ').height() - $('.page-toc').position().top;
-    var count =  bar/26/2;
-    var barHeight = $('.page-toc').outerHeight()
     $('.page-toc li').eq(0).children('a').addClass('red');
     var arr = [];
     $("h2,h3").each(function () {
+        $(this).attr('t',$(this).position().top);
         arr.push($(this).position().top);
     });
-    function dark(){
-        var top =  Math.abs($('.page-toc > ul').position().top);
+    $(window).on('scroll', function () {
         var cur = $(document).scrollTop();
         for(var i = arr.length; i >=0;i--){
             if(arr[i]<=cur){
@@ -69,17 +66,7 @@
             i = 0;
         }
         $('.page-toc li a').removeClass('red');
-        $('.page-toc li').eq(i).children('a').addClass('red');
-        if(i> arr.length-count){
-            $(' .page-toc > ul').css('top',-(barHeight-bar));
-            return;
-        }
-        if(i>count){
-            $(' .page-toc > ul').css('top',-26*(i-count));
-        }else{
-            $(' .page-toc > ul').css('top',0);
-        }
-    }
-    $(window).on('scroll',dark);
+        $('.page-toc li').eq(i).children('a').addClass('red')
+    });
 </script>
 </html>
